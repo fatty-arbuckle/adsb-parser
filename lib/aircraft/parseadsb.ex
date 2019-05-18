@@ -150,6 +150,7 @@ defmodule Aircraft.ParseAdsb do
 
   defp get_field(fields, f) do
     case Enum.at(fields, f) do
+      nil -> nil
       value -> String.trim(value)
     end
   end
@@ -158,6 +159,7 @@ defmodule Aircraft.ParseAdsb do
   defp parse_boolean("-1"), do: True
   defp parse_boolean(_), do: False
 
+  defp parse_integer(s) when s == nil, do: nil
   defp parse_integer(s) do
     case Integer.parse(s) do
       {i, _} -> i
